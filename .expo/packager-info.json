@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 8398,
+  "expoServerNgrokUrl": "https://w7-mfs.anonymous.project-apollo.exp.direct",
+  "packagerNgrokUrl": "https://packager.w7-mfs.anonymous.project-apollo.exp.direct",
+  "ngrokPid": 8453,
   "webpackServerPort": null
 }
