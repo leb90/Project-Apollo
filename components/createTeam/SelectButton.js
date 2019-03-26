@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { colorAdd , getData} from "../../actions/userAction";
 import {
   Button,
   Text,
@@ -26,7 +28,7 @@ const sports = [
   },
 ];
 
-export default class App extends React.Component {
+class SelectButton extends React.Component {
   constructor(props) {
     super(props);
 
@@ -40,7 +42,7 @@ export default class App extends React.Component {
     this.state = {
       numbers: [
         {
-          label: 'Orange',
+          label: 'naranja',
           value: "orange",
           color: 'orange',
         },
@@ -50,15 +52,20 @@ export default class App extends React.Component {
           color: 'green',
         },
       ],
-      favSport0: undefined,
-      favSport1: undefined,
-      favSport2: undefined,
-      favSport3: undefined,
-      favSport4: 'baseball',
       favNumber: undefined,
     };
   }
+  componentDidUpdate(prevProps , prevState) {
+    if (this.state.favNumber !== prevState.favNumber) { 
+        
+        this.props.colorAdd(
+            this.state.favNumber
+        );
+        this.props.getData();
 
+        console.log(this.props.userReducer, "REDUCER!")
+    }
+  }
   render() {
     const placeholder = {
       label: 'Selecciona un color...',
@@ -68,28 +75,24 @@ export default class App extends React.Component {
 
     return (
       <ScrollView style={styles.container}>
-      <Text>Color</Text>
-        {/* and iOS onUpArrow/onDownArrow toggle example */}
+        <Text>Color</Text>
         <RNPickerSelect
-        style={styles.picker}
+          style={{
+            ...pickerSelectStyles,
+            iconContainer: {
+              top: 10,
+              right: 12,
+            },
+          }}
           placeholder={placeholder}
           items={this.state.numbers}
           onValueChange={value => {
             this.setState({
-                favNumber: value,
+              favNumber: value,
             });
-          }}
-          onUpArrow={() => {
-            this.inputRefs.firstTextInput.focus();
-          }}
-          onDownArrow={() => {
-            this.inputRefs.favSport1.togglePicker();
+            console.log(value)           
           }}
           style={pickerSelectStyles}
-          value={this.state.favSport0}
-          ref={el => {
-            this.inputRefs.favSport0 = el;
-          }}
         />
       </ScrollView>
     );
@@ -97,25 +100,28 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 5,
-    paddingHorizontal: 5
-  },
+    container: {
+        flex: 1,
+      },
 });
 
-const picker = StyleSheet.create({
-    btn: {
-        
-    }
-})
+
 
 const pickerSelectStyles = StyleSheet.create({
-  inputAndroid: {
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
-    borderColor: 'red',
-    borderRadius: 8,
-    color: 'black'
-  },
+    inputAndroid: {
+        borderWidth: 0.5,
+        borderColor: 'red',
+        borderRadius: 8,
+        color: 'black',
+        paddingRight: 30, // to ensure the text is never behind the icon
+      },
 });
+
+const mapStateToProps = state => {
+    return {
+      userReducer: state.userReducer
+    };
+  };
+  
+export default connect(mapStateToProps,
+    { colorAdd , getData })(SelectButton)

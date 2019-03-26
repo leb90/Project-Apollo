@@ -7,17 +7,22 @@ import { connect } from "react-redux";
 import { loginGet } from "../../actions/userAction";
 import SelectButton from "./SelectButton"
 
-class Login extends Component {
+class CreateTeam extends Component {
   constructor(props) {
     super(props);
     this.state = {
       teamName: null, 
       teamCheer: null,
-      teamColor:null,
+      teamColors:[],
       formation:null,
       isNotAutheticated: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleReceiveColor= color=>{
+    this.setState({
+      teamColors: teamColors.push(color)
+    })
   }
   handleSubmit(){
     console.log(this.state)
@@ -43,9 +48,9 @@ class Login extends Component {
             underlineColorAndroid='transparent'
           />
           <View style={styles.selectContainer}>
-             <SelectButton style={styles.selectBtn}/>
-             <SelectButton style={styles.selectBtn}/>
-             <SelectButton style={styles.selectBtn}/>
+             <SelectButton/>
+             <SelectButton/>
+             <SelectButton/>
           </View>
          
           <TextInput
@@ -78,4 +83,4 @@ const mapStateToProps = state => {
 export default connect (
   mapStateToProps,
   { loginGet }
-)(Login);
+)(CreateTeam);

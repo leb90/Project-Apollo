@@ -29,16 +29,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#01c853',
         padding: 20,
         alignItems: 'center'
-    },
-    selectContainer:{
-        flex:1,
-        flexDirection: 'row',
-        justifyContent:'center',
-        alignItems:"center"
-    },
-    selectBtn:{
-        flex:1,
-        paddingVertical:5
     }
 });
 
