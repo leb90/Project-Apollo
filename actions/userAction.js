@@ -1,7 +1,8 @@
 import {
   FETCHING_DATA,
   FETCHING_DATA_SUCCESS,
-  FETCHING_DATA_FAILURE
+  FETCHING_DATA_FAILURE,
+  USER_ADD_COLOR
 } from "../constants";
 import apiService from "../lib/apiService/apiService";
 
@@ -24,6 +25,12 @@ export const getDataFailure = () => {
   };
 };
 
+export const userAddColors = data =>{
+  return {
+    type: USER_ADD_COLOR,
+    data
+  }
+}
 export const usersGet = () => {
   return dispatch => {
     apiService("GET", "/users")
@@ -65,3 +72,9 @@ export const loginGet = data => {
       });
   };
 };
+
+export const colorAdd = data =>{
+  return dispatch => {
+    dispatch(userAddColors(data))
+  }
+}

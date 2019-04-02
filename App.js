@@ -4,6 +4,7 @@ import Login from './components/login/Login';
 import Profile from './components/profile/Profile';
 import configureStore from "./configureStore";
 import { Provider } from "react-redux";
+import CreateTeam from './components/createTeam/CreateTeam'
 
 const store = configureStore();
 const AppContainer = createStackNavigator({
@@ -20,7 +21,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Application/>
+        <CreateTeam/>
       </Provider>
     );
   }
